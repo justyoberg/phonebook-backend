@@ -6,6 +6,17 @@ app.get('/api/persons', (request, response) => {
   response.json(data.numbers)
 })
 
+app.get('/api/persons/:id', (request, response) => {
+  const id = Number(request.params.id)
+  const person = data.numbers.find(n => n.id === id)
+
+  if (!person) {
+    return response.status(400).send("<p>That person doesn't exist</p>")
+  }
+
+  response.json(person)
+})
+
 app.get('/info', (request, response) => {
   const time = new Date()
   response.send(`
