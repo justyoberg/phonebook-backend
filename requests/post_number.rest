@@ -1,0 +1,26 @@
+### Valid
+POST http://localhost:3001/api/persons
+content-type: application/json
+
+{
+    "name": "Justy Oberg",
+    "number": "555-555-5555"
+}
+
+### Missing Name
+
+POST http://localhost:3001/api/persons
+content-type: application/json
+
+{
+    "number": "555-555-5555"
+}
+
+### Missing number
+
+POST http://localhost:3001/api/persons
+content-type: application/json
+
+{
+    "name" :"Justy Oberg"
+}
