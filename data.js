@@ -21,4 +21,4 @@ const numbers = [
     }
 ]
 
-export default numbers
+exports.numbers = numbers;
