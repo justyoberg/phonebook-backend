@@ -31,6 +31,10 @@ const generateId = () => {
   return Math.floor(Math.random() * 999999)
 }
 
+const personInPhonebook = (name) => {
+  return data.numbers.find(p => p.name === name)
+}
+
 app.post('/api/persons', (request, response) => {
   const body = request.body
   
@@ -42,6 +46,12 @@ app.post('/api/persons', (request, response) => {
       response.status(400).json({
         error: 'name missing'
       })
+  }
+  
+  if (personInPhonebook(body.name)) {
+    return response.status(400).json({
+      error: 'name already in phonebook'
+    })
   }
 
   const person = {
