@@ -15,6 +15,7 @@ app.use(morgan((tokens, req, res) => {
     `Status code: ${tokens.status(req, res)}`,
     `Content length: ${tokens.res(req, res, 'content-length')}`,
     `Time: ${tokens['response-time'](req, res)} ms`,
+    `Body: ${JSON.stringify(req.body)}`,
     '---------------',
   ].join('\n')
 }))
