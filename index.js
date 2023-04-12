@@ -1,4 +1,4 @@
-require('dotenv').config({ path: './config.env'})
+require('dotenv').config({ path: './config.env' })
 const express = require('express')
 const morgan = require('morgan')
 const cors = require('cors')
@@ -39,7 +39,7 @@ app.get('/api/persons/:id', (request, response, next) => {
       if (person) {
         response.json(person)
       } else {
-        response.status(404).end() 
+        response.status(404).end()
       }
     })
     .catch(error => next(error))
@@ -75,7 +75,7 @@ app.post('/api/persons', (request, response, next) => {
         person.save().then(savedPerson => {
           response.json(savedPerson)
         })
-        .catch(error => next(error))
+          .catch(error => next(error))
       }
     })
 })
@@ -85,8 +85,8 @@ app.put('/api/persons/:id', (request, response, next) => {
 
   Person
     .findByIdAndUpdate(
-      request.params.id, 
-      { name, number }, 
+      request.params.id,
+      { name, number },
       { new: true, runValidators: true, context: 'query' },
     )
     .then(updatedPerson => {
@@ -98,7 +98,7 @@ app.put('/api/persons/:id', (request, response, next) => {
 app.delete('/api/persons/:id', (request, response, next) => {
   Person
     .deleteOne({ _id: request.params.id })
-    .then(result => {
+    .then(() => {
       response.status(204).end()
     })
     .catch(error => next(error))
