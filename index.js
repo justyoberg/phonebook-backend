@@ -26,25 +26,32 @@ app.use(cors())
 app.use(express.static('build'))
 
 app.get('/api/persons', (request, response) => {
-  Person.find({}).then(persons => {
-    response.json(persons)
-  })
+  Person
+    .find({})
+    .then(persons => {
+      response.json(persons)
+    })
 })
 
-app.get('/api/persons/:id', (request, response) => {
-  Person.findById(request.params.id).then(persons => {
-    response.json(persons)
-  })
+app.get('/api/persons/:id', (request, response, next) => {
+  Person
+    .findById(request.params.id)
+    .then(persons => {
+      response.json(persons)
+    })
+    .catch(error => next(error))
 })
 
 app.get('/info', (request, response) => {
   const time = new Date()
-  Person.countDocuments({}).then((count) => {
-    response.send(`
-      <p>Phonebook has info for ${count} people</p>
-      <p>${time}</p>
-    `)
-  });
+  Person
+    .countDocuments({})
+    .then((count) => {
+      response.send(`
+        <p>Phonebook has info for ${count} people</p>
+        <p>${time}</p>
+      `)
+    })
 })
 
 app.post('/api/persons', (request, response) => {
@@ -60,21 +67,23 @@ app.post('/api/persons', (request, response) => {
       })
   }
 
-  Person.exists({ name: body.name }).then(person => {
-    if (person) {
-      return response.status(400).json({
-        error: 'that person is in the phonebook'
-      })
-    } else {
-      const person = new Person({
-        name: body.name,
-        number: body.number,
-      })
-      person.save().then(savedPerson => {
-        response.json(savedPerson)
-      })
-    }
-  })
+  Person
+    .exists({ name: body.name })
+    .then(person => {
+      if (person) {
+        return response.status(400).json({
+          error: 'that person is in the phonebook'
+        })
+      } else {
+        const person = new Person({
+          name: body.name,
+          number: body.number,
+        })
+        person.save().then(savedPerson => {
+          response.json(savedPerson)
+        })
+      }
+    })
 })
 
 app.put('/api/persons/:id', (request, response, next) => {
@@ -85,7 +94,8 @@ app.put('/api/persons/:id', (request, response, next) => {
     number: body.number,
   }
 
-  Person.findByIdAndUpdate(request.params.id, person, { new: true })
+  Person
+    .findByIdAndUpdate(request.params.id, person, { new: true })
     .then(updatedPerson => {
       response.json(updatedPerson)
     })
@@ -98,6 +108,7 @@ app.delete('/api/persons/:id', (request, response, next) => {
     .then(result => {
       response.status(204).end()
     })
+    .catch(error => next(error))
 })
 
 app.use(unknownEndpoint)
