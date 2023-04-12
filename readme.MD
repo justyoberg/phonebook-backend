@@ -1,3 +1,3 @@
-[Preview](https://dark-glitter-814.fly.dev/api/persons)
+[Preview](https://broken-darkness-9502.fly.dev/)
 
-Backend-only deployment of the phonebook app.
+Phonebook app created with React, express, and MongoDB for storage

@@ -1,6 +1,6 @@
-# fly.toml file generated for dark-glitter-814 on 2023-04-06T19:25:02-07:00
+# fly.toml file generated for broken-darkness-9502 on 2023-04-12T13:08:49-07:00
 
-app = "dark-glitter-814"
+app = "broken-darkness-9502"
 kill_signal = "SIGINT"
 kill_timeout = 5
 mounts = []

@@ -4,8 +4,8 @@ POST http://localhost:3001/api/persons
 content-type: application/json
 
 {
-    "name": "Justy Oberg",
-    "number": "555-555-5555"
+    "name": "Justy Ober",
+    "number": "555-55555"
 }
 
 ### Missing Name
@@ -34,4 +34,14 @@ content-type: application/json
 {
     "name": "Arto Hellas",
     "number": "040-123456"
+}
+
+### 
+
+PUT http://localhost:3001/api/persons/64370276dd8467baf83fd6e3
+content-type: application/json
+
+{
+    "name": "arto hellas",
+    "number": "04r4246"
 }
